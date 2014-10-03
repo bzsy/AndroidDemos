@@ -42,19 +42,33 @@ public class MainActivity extends Activity implements LoadDataListener{
 	}
 
 	/**
-	 * 添加数据
+	 * 加载数据
 	 */
 	@Override
 	public void loadData() {
-		// TODO Auto-generated method stub
 		new Handler().postDelayed(new Runnable() {//模拟加载延时
 			
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				addData(5);
 				simpleAdapter.notifyDataSetChanged();
 				listView.loadDataFinished();
+			}
+		}, 1000);
+		
+	}
+
+	@Override
+	public void refresh() {
+		new Handler().postDelayed(new Runnable() {//模拟刷新延时
+			
+			@Override
+			public void run() {
+				arrayList.clear();
+				totalItemCount = 0;
+				addData(10);
+				simpleAdapter.notifyDataSetChanged();
+				listView.refreshDataFinished();
 			}
 		}, 1000);
 		
