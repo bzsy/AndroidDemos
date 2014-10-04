@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">WeChatDemo</string>
+    <string name="chat">微信</string>
+    <string name="contact">通讯录</string>
+    <string name="explor">发现</string>
+    <string name="my">我</string>
+
+</resources>
