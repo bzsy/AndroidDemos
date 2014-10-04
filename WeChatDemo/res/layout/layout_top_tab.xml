@@ -7,7 +7,7 @@
     <TextView 
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="微信"
+        android:text="@string/chat"
         android:textSize="18sp"
         android:textColor="#eeeeee"
         android:paddingLeft="10dp"
