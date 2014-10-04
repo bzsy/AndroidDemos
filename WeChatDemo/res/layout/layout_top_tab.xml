@@ -8,8 +8,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:text="微信"
-        android:textSize="20sp"
-        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:textColor="#eeeeee"
         android:paddingLeft="10dp"
         android:gravity="center_vertical"/>
     <LinearLayout 

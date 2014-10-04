@@ -23,6 +23,7 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
 	final int PAGE_CONTACT = 1;
 	final int PAGE_EXPLOR = 2;
 	final int PAGE_MY = 3;
+	private boolean isScrollView = true;//true：滑动切换； false：点击底部导航栏切换
 	
 	//灰色底部导航栏
 	private ImageView imageViewChat;
@@ -89,9 +90,9 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
 		
 		for (int i = 0; i < MAX_PAGES; i++) {
 			imageViews_s[i].setOnClickListener(this);
-			imageViews_s[i].setAlpha((float)0);
-			textViews_s[i].setAlpha((float)0);
+			textViews_s[i].setOnClickListener(this);
 		}
+		clearView();
 		imageViewChat.setAlpha((float)0);
 		imageViewChat_s.setAlpha((float)1);
 		textViewChat.setAlpha((float)0);
@@ -128,7 +129,9 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
 
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
-		
+		if(arg0 == 1){
+			isScrollView = true;
+		}
 	}
 
 	/**
@@ -136,17 +139,20 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
 	 */
 	@Override
 	public void onPageScrolled(int arg0, float arg1, int arg2) {
-		imageViews_s[arg0].setAlpha(1-arg1);
-		textViews_s[arg0].setAlpha(1-arg1);
-		imageViews[arg0].setAlpha(arg1);
-		textViews[arg0].setAlpha(arg1);
-		
-		if(arg0+1 < MAX_PAGES){
-			imageViews_s[arg0+1].setAlpha(arg1);
-			textViews_s[arg0+1].setAlpha(arg1);
-			imageViews[arg0+1].setAlpha(1-arg1);
-			textViews[arg0+1].setAlpha(1-arg1);
+		if (isScrollView) {
+			imageViews_s[arg0].setAlpha(1-arg1);
+			textViews_s[arg0].setAlpha(1-arg1);
+			imageViews[arg0].setAlpha(arg1);
+			textViews[arg0].setAlpha(arg1);
+			
+			if(arg0+1 < MAX_PAGES){
+				imageViews_s[arg0+1].setAlpha(arg1);
+				textViews_s[arg0+1].setAlpha(arg1);
+				imageViews[arg0+1].setAlpha(1-arg1);
+				textViews[arg0+1].setAlpha(1-arg1);
+			}
 		}
+		
 	}
 
 	@Override
@@ -160,24 +166,43 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
 	@Override
 	public void onClick(View arg0) {
 		int page = 0;
+		isScrollView = false;
 		switch(arg0.getId()){
 		case R.id.imageViewChat_s:
+		case R.id.textViewChat_s:
 			page = PAGE_CHAT;
 			break;
 		case R.id.imageViewContact_s:
+		case R.id.textViewContact_s:
 			page = PAGE_CONTACT;
 			break;
 		case R.id.imageViewExplor_s:
+		case R.id.textViewExplor_s:
 			page = PAGE_EXPLOR;
 			break;
 		case R.id.imageViewMy_s:
+		case R.id.textViewMy_s:
 			page = PAGE_MY;
 			break;
 		default:
 			break;
 		}
 		if(viewPager.getCurrentItem() != page){
-			viewPager.setCurrentItem(page, true);;
+			viewPager.setCurrentItem(page);
+			clearView();
+			imageViews_s[page].setAlpha((float)1);
+			textViews_s[page].setAlpha((float)1);
+			imageViews[page].setAlpha((float)0);
+			textViews[page].setAlpha((float)0);
+		}
+	}
+	
+	private void clearView(){
+		for (int i = 0; i < MAX_PAGES; i++) {
+			imageViews_s[i].setAlpha((float)0);
+			textViews_s[i].setAlpha((float)0);
+			imageViews[i].setAlpha((float)1);
+			textViews[i].setAlpha((float)1);
 		}
 	}
 }
