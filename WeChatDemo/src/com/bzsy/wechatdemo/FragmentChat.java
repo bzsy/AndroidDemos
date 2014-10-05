@@ -8,9 +8,13 @@ import com.bzsy.wechatdemo.MyListView.LoadDataListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.SimpleAdapter;
 
 public class FragmentChat extends Fragment implements LoadDataListener {
@@ -25,6 +29,9 @@ public class FragmentChat extends Fragment implements LoadDataListener {
 			R.drawable.chat9, R.drawable.chat10 };
 	private String[] weekDays = new String[] { "周日", "周六", "周五", "周四", "周三",
 			"周二", "周一" };
+
+	final int ITEM_DEL = 1;// contextmenu中的删除项
+	private int item_slected;// contextmenu对应的列表项
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +50,9 @@ public class FragmentChat extends Fragment implements LoadDataListener {
 				getActivity().getApplicationContext(), arrayList,
 				R.layout.layout_list_item, from, to);
 		listView.setAdapter(simpleAdapter);
+
+		registerForContextMenu(listView);
+
 		return v;
 	}
 
@@ -74,5 +84,35 @@ public class FragmentChat extends Fragment implements LoadDataListener {
 			map.put("ItemTime", weekDays[i % 7]);
 			arrayList.add(map);
 		}
+	}
+
+	/**
+	 * ContextMenu
+	 */
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		// TODO Auto-generated method stub
+		AdapterContextMenuInfo mMenuInfo = (AdapterContextMenuInfo) menuInfo;
+		item_slected = mMenuInfo.position - 1;
+		menu.setHeaderTitle(arrayList.get(item_slected).get("ItemTitle").toString());
+		menu.add(0, 1, 0, "删除该聊天");
+
+		super.onCreateContextMenu(menu, v, menuInfo);
+	}
+
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case 1:
+			arrayList.remove(item_slected);
+			simpleAdapter.notifyDataSetChanged();
+			break;
+
+		default:
+			break;
+		}
+		return super.onContextItemSelected(item);
 	}
 }

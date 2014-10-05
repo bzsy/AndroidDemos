@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="mGreen">#48b800</color>
+    <color name="mGrayBackground">#eeeeee</color>
+    <color name="mBlackBackground">#333333</color>
+    <color name="mGrayText">#888888</color>
+    <color name="mBlackText">#333333</color>
+    <color name="mLightText">#eeeeee</color>
+</resources>

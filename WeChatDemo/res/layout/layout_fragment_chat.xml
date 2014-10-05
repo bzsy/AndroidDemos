@@ -3,11 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
 
-    <com.bzsy.wechatdemo.MyListView 
+    <com.bzsy.wechatdemo.MyListView
         android:id="@+id/chatListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        ></com.bzsy.wechatdemo.MyListView>
+        android:divider="@color/mGrayText" 
+        android:dividerHeight="1px">
+    </com.bzsy.wechatdemo.MyListView>
+
 </LinearLayout>

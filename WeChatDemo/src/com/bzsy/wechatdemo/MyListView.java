@@ -152,8 +152,13 @@ public class MyListView extends ListView implements OnScrollListener{
 				break;
 		}
 		if(startY > 0){
-			if(refreshState!=REFRESH_STATE_REFRESHING)
+			if(refreshState!=REFRESH_STATE_REFRESHING){
+				if (len > headerMeasuredHeight) {
+					len = headerMeasuredHeight;
+				}
 				setHeaderPaddingTop(len-headerMeasuredHeight);
+			}
+				
 			updataView(refreshState);
 		}
 		return super.onTouchEvent(ev);
