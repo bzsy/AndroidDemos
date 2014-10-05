@@ -5,9 +5,9 @@
     android:orientation="vertical" >
     
 
-    <TextView 
+    <com.bzsy.wechatdemo.MyListView 
+        android:id="@+id/chatListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Fragment chat"
-        android:gravity="center"/>
+        ></com.bzsy.wechatdemo.MyListView>
 </LinearLayout>

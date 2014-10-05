@@ -1,7 +1,6 @@
 package com.bzsy.wechatdemo;
 
 import java.util.ArrayList;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -122,7 +121,9 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
 			}
 		};
 		
+		
 		viewPager = (ViewPager) findViewById(R.id.viewPager);
+		viewPager.setPageTransformer(true, new FadeOutPageTransformer());
 		viewPager.setAdapter(fragmentPagerAdapter);
 		viewPager.setOnPageChangeListener(this);
 	}
@@ -203,6 +204,30 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
 			textViews_s[i].setAlpha((float)0);
 			imageViews[i].setAlpha((float)1);
 			textViews[i].setAlpha((float)1);
+		}
+	}
+	
+	/**
+	 * ViewPager切换 淡入淡出效果
+	 * @author bzsy
+	 *
+	 */
+	public class FadeOutPageTransformer implements ViewPager.PageTransformer {
+		
+	    public void transformPage(View view, float position) {
+
+	        if (position < -1) { // [-Infinity,-1)
+	            // This page is way off-screen to the left.
+	            view.setAlpha(0);
+
+	        } else if (position <= 1) { // [-1,1]
+	            // Fade the page relative to its position.
+	            view.setAlpha(1-Math.abs(position));
+
+	        } else { // (1,+Infinity]
+	            // This page is way off-screen to the right.
+	            view.setAlpha(0);
+			}
 		}
 	}
 }

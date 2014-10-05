@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    
-    <android.support.v4.view.ViewPager 
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#eeeeee"
-        android:layout_alignParentTop="true">
-    </android.support.v4.view.ViewPager>
-
-	<FrameLayout 
+    android:layout_height="wrap_content" >
+   
+    	<FrameLayout 
         android:id="@+id/buttomLayout"
         android:background="#eeeeee"
 	    android:layout_width="match_parent"
@@ -196,10 +188,11 @@
     
     <!-- 底部导航栏和内容布局的分割线 -->
     <ImageView 
+        android:id="@+id/imageViewLine"
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="#777777"
         android:layout_above="@id/buttomLayout"
     />
 
-</RelativeLayout>
+</merge>

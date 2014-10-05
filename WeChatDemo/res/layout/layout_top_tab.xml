@@ -1,34 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:background="#333333">
-    
-    <TextView 
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="@string/chat"
-        android:textSize="18sp"
-        android:textColor="#eeeeee"
-        android:paddingLeft="10dp"
-        android:gravity="center_vertical"/>
-    <LinearLayout 
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_vertical"
-        android:layout_alignParentRight="true">
-        <ImageView 
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/search"
-            android:layout_marginRight="30dp"/>
-        <ImageView 
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/add"
-            android:layout_marginRight="10dp"/>
-    </LinearLayout>
+    android:layout_height="wrap_content" >
 
-</RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/layoutTopTab"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#333333" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="@string/chat"
+            android:textColor="#eeeeee"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/search" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/add" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layoutTopTab"
+        android:layout_above="@id/imageViewLine"
+        android:background="#eeeeee" >
+    </android.support.v4.view.ViewPager>
+
+</merge>
