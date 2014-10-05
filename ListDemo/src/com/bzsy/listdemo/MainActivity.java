@@ -14,8 +14,8 @@ public class MainActivity extends Activity implements LoadDataListener{
 
 	private MyListView listView;
 	private SimpleAdapter simpleAdapter;
-	private int totalItemCount = 0;
-	private ArrayList<HashMap<String, Object>> arrayList = new ArrayList<HashMap<String, Object>>();
+	private int totalItemCount = 0;//列表数据项
+	private ArrayList<HashMap<String, Object>> arrayList = new ArrayList<HashMap<String, Object>>();//列表数据
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
