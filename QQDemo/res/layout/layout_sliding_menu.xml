@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:paddingLeft="30dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="30dp" >
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/qq_icon" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/sliding_menu_paddingleft" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nicheng"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/qq_svip" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/qq_star" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/qq_star" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/sliding_menu_paddingbottom"
+            android:paddingTop="@dimen/sliding_menu_paddingtop" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/qq_setting_me_richstatus_icon_none" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/qianming"
+                android:textColor="@android:color/darker_gray" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/qq_setting_svip"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/sliding_menu_paddingbottom"
+            android:paddingTop="@dimen/sliding_menu_paddingtop"
+            android:text="@string/vip"
+            android:textColor="@android:color/darker_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/qq_setting_qianbao"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/sliding_menu_paddingbottom"
+            android:paddingTop="@dimen/sliding_menu_paddingtop"
+            android:text="@string/qianbao"
+            android:textColor="@android:color/darker_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/qq_setting_zhuangban"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/sliding_menu_paddingbottom"
+            android:paddingTop="@dimen/sliding_menu_paddingtop"
+            android:text="@string/zhuangban"
+            android:textColor="@android:color/darker_gray" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="@dimen/sliding_menu_paddingbottom"
+            android:layout_marginTop="@dimen/sliding_menu_paddingtop"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/qq_setting_shoucang"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/sliding_menu_paddingbottom"
+            android:paddingTop="@dimen/sliding_menu_paddingtop"
+            android:text="@string/shoucang"
+            android:textColor="@android:color/darker_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/qq_setting_xiangce"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/sliding_menu_paddingbottom"
+            android:paddingTop="@dimen/sliding_menu_paddingtop"
+            android:text="@string/xiangce"
+            android:textColor="@android:color/darker_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/qq_setting_wenjian"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/sliding_menu_paddingbottom"
+            android:paddingTop="@dimen/sliding_menu_paddingtop"
+            android:text="@string/wenjian"
+            android:textColor="@android:color/darker_gray" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="30dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/qq_setting_setting"
+            android:gravity="center_vertical"
+            android:text="@string/setting"
+            android:textColor="@android:color/darker_gray" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@android:color/darker_gray"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/qq_setting_me_nightmode_off"
+            android:gravity="center_vertical"
+            android:text="@string/nightmode"
+            android:textColor="@android:color/darker_gray" />
+    </LinearLayout>
+
+</RelativeLayout>

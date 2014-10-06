@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">QQDemo</string>
+    <string name="nightmode">夜间</string>
+    <string name="setting">设置</string>
+    <string name="wenjian">我的文件</string>
+    <string name="xiangce">我的相册</string>
+    <string name="shoucang">我的收藏</string>
+    <string name="zhuangban">个性装扮</string>
+    <string name="qianbao">QQ钱包</string>
+    <string name="vip">我的QQ会员</string>
+    <string name="qianming">编辑个性签名</string>
+    <string name="nicheng">QQ昵称</string>
+
+</resources>
