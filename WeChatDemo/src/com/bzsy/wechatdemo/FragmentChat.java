@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.bzsy.wechatdemo.MyListView.LoadDataListener;
+import com.jauker.widget.BadgeView;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,14 +24,12 @@ public class FragmentChat extends Fragment implements LoadDataListener {
 	private MyListView listView;
 	private SimpleAdapter simpleAdapter;
 	private ArrayList<HashMap<String, Object>> arrayList = new ArrayList<HashMap<String, Object>>();
-
 	private int[] chatIcons = new int[] { R.drawable.chat1, R.drawable.chat2,
 			R.drawable.chat3, R.drawable.chat4, R.drawable.chat5,
 			R.drawable.chat6, R.drawable.chat7, R.drawable.chat8,
 			R.drawable.chat9, R.drawable.chat10 };
 	private String[] weekDays = new String[] { "周日", "周六", "周五", "周四", "周三",
 			"周二", "周一" };
-
 	final int ITEM_DEL = 1;// contextmenu中的删除项
 	private int item_slected;// contextmenu对应的列表项
 
@@ -50,9 +50,7 @@ public class FragmentChat extends Fragment implements LoadDataListener {
 				getActivity().getApplicationContext(), arrayList,
 				R.layout.layout_list_item, from, to);
 		listView.setAdapter(simpleAdapter);
-
 		registerForContextMenu(listView);
-
 		return v;
 	}
 
@@ -92,10 +90,10 @@ public class FragmentChat extends Fragment implements LoadDataListener {
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
-		// TODO Auto-generated method stub
 		AdapterContextMenuInfo mMenuInfo = (AdapterContextMenuInfo) menuInfo;
 		item_slected = mMenuInfo.position - 1;
-		menu.setHeaderTitle(arrayList.get(item_slected).get("ItemTitle").toString());
+		menu.setHeaderTitle(arrayList.get(item_slected).get("ItemTitle")
+				.toString());
 		menu.add(0, 1, 0, "删除该聊天");
 
 		super.onCreateContextMenu(menu, v, menuInfo);
@@ -103,7 +101,6 @@ public class FragmentChat extends Fragment implements LoadDataListener {
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case 1:
 			arrayList.remove(item_slected);

@@ -1,30 +1,41 @@
 package com.bzsy.wechatdemo;
 
 import java.util.ArrayList;
+
+import com.jauker.widget.BadgeView;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MainActivity extends FragmentActivity implements OnPageChangeListener, OnClickListener{
+public class MainActivity extends FragmentActivity implements
+		OnPageChangeListener, OnClickListener {
 
 	private ViewPager viewPager;
 	private FragmentPagerAdapter fragmentPagerAdapter;
 	private ArrayList<Fragment> fragmentArrayList;
-	final int MAX_PAGES = 4;//Tab页面数量
+	FragmentChat fragmentChat;
+	FragmentContact fragmentContact;
+	FragmentExplor fragmentExplor;
+	FragmentMy fragmentMy = new FragmentMy();
+	final int MAX_PAGES = 4;// Tab页面数量
 	final int PAGE_CHAT = 0;
 	final int PAGE_CONTACT = 1;
 	final int PAGE_EXPLOR = 2;
 	final int PAGE_MY = 3;
-	private boolean isScrollView = true;//true：滑动切换； false：点击底部导航栏切换
-	
-	//灰色底部导航栏
+	private boolean isScrollView = true;// true：滑动切换； false：点击底部导航栏切换
+
+	// 灰色底部导航栏
 	private ImageView imageViewChat;
 	private ImageView imageViewContact;
 	private ImageView imageViewExplor;
@@ -33,8 +44,8 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
 	private TextView textViewContact;
 	private TextView textViewExplor;
 	private TextView textViewMy;
-	
-	//绿色底部导航栏
+
+	// 绿色底部导航栏
 	private ImageView imageViewChat_s;
 	private ImageView imageViewContact_s;
 	private ImageView imageViewExplor_s;
@@ -43,18 +54,18 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
 	private TextView textViewContact_s;
 	private TextView textViewExplor_s;
 	private TextView textViewMy_s;
-	
+
 	private ImageView[] imageViews;
 	private ImageView[] imageViews_s;
-	
+
 	private TextView[] textViews;
 	private TextView[] textViews_s;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		initView();
 	}
 
@@ -70,7 +81,7 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
 		textViewContact = (TextView) findViewById(R.id.textViewContact);
 		textViewExplor = (TextView) findViewById(R.id.textViewExplor);
 		textViewMy = (TextView) findViewById(R.id.textViewMy);
-		
+
 		imageViewChat_s = (ImageView) findViewById(R.id.imageViewChat_s);
 		imageViewContact_s = (ImageView) findViewById(R.id.imageViewContact_s);
 		imageViewExplor_s = (ImageView) findViewById(R.id.imageViewExplor_s);
@@ -79,58 +90,63 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
 		textViewContact_s = (TextView) findViewById(R.id.textViewContact_s);
 		textViewExplor_s = (TextView) findViewById(R.id.textViewExplor_s);
 		textViewMy_s = (TextView) findViewById(R.id.textViewMy_s);
-		
-		
-		imageViews = new ImageView[]{imageViewChat, imageViewContact, imageViewExplor, imageViewMy};
-		imageViews_s = new ImageView[]{imageViewChat_s, imageViewContact_s, imageViewExplor_s, imageViewMy_s};
-		
-		textViews = new TextView[]{textViewChat, textViewContact, textViewExplor, textViewMy};
-		textViews_s = new TextView[]{textViewChat_s, textViewContact_s, textViewExplor_s, textViewMy_s};
-		
+
+		imageViews = new ImageView[] { imageViewChat, imageViewContact,
+				imageViewExplor, imageViewMy };
+		imageViews_s = new ImageView[] { imageViewChat_s, imageViewContact_s,
+				imageViewExplor_s, imageViewMy_s };
+
+		textViews = new TextView[] { textViewChat, textViewContact,
+				textViewExplor, textViewMy };
+		textViews_s = new TextView[] { textViewChat_s, textViewContact_s,
+				textViewExplor_s, textViewMy_s };
+
 		for (int i = 0; i < MAX_PAGES; i++) {
 			imageViews_s[i].setOnClickListener(this);
 			textViews_s[i].setOnClickListener(this);
 		}
 		clearView();
-		imageViewChat.setAlpha((float)0);
-		imageViewChat_s.setAlpha((float)1);
-		textViewChat.setAlpha((float)0);
-		textViewChat_s.setAlpha((float)1);		
-		
-		FragmentChat fragmentChat = new FragmentChat();
-		FragmentContact fragmentContact = new FragmentContact();
-		FragmentExplor fragmentExplor = new FragmentExplor();
-		FragmentMy fragmentMy = new FragmentMy();
-		
+		imageViewChat.setAlpha((float) 0);
+		imageViewChat_s.setAlpha((float) 1);
+		textViewChat.setAlpha((float) 0);
+		textViewChat_s.setAlpha((float) 1);
+
+		fragmentChat = new FragmentChat();
+		fragmentContact = new FragmentContact();
+		fragmentExplor = new FragmentExplor();
+		fragmentMy = new FragmentMy();
+
 		fragmentArrayList = new ArrayList<Fragment>();
 		fragmentArrayList.add(fragmentChat);
 		fragmentArrayList.add(fragmentContact);
 		fragmentArrayList.add(fragmentExplor);
 		fragmentArrayList.add(fragmentMy);
-		
-		fragmentPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
-			
+
+		fragmentPagerAdapter = new FragmentPagerAdapter(
+				getSupportFragmentManager()) {
+
 			@Override
 			public int getCount() {
 				return fragmentArrayList.size();
 			}
-			
+
 			@Override
 			public Fragment getItem(int arg0) {
 				return fragmentArrayList.get(arg0);
 			}
 		};
-		
-		
+
 		viewPager = (ViewPager) findViewById(R.id.viewPager);
 		viewPager.setPageTransformer(true, new FadeOutPageTransformer());
 		viewPager.setAdapter(fragmentPagerAdapter);
 		viewPager.setOnPageChangeListener(this);
+		
+		setMessageNotify(1);
 	}
 
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
-		if(arg0 == 1){
+		if (arg0 == 1) {
 			isScrollView = true;
 		}
 	}
@@ -141,24 +157,24 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
 	@Override
 	public void onPageScrolled(int arg0, float arg1, int arg2) {
 		if (isScrollView) {
-			imageViews_s[arg0].setAlpha(1-arg1);
-			textViews_s[arg0].setAlpha(1-arg1);
+			imageViews_s[arg0].setAlpha(1 - arg1);
+			textViews_s[arg0].setAlpha(1 - arg1);
 			imageViews[arg0].setAlpha(arg1);
 			textViews[arg0].setAlpha(arg1);
-			
-			if(arg0+1 < MAX_PAGES){
-				imageViews_s[arg0+1].setAlpha(arg1);
-				textViews_s[arg0+1].setAlpha(arg1);
-				imageViews[arg0+1].setAlpha(1-arg1);
-				textViews[arg0+1].setAlpha(1-arg1);
+
+			if (arg0 + 1 < MAX_PAGES) {
+				imageViews_s[arg0 + 1].setAlpha(arg1);
+				textViews_s[arg0 + 1].setAlpha(arg1);
+				imageViews[arg0 + 1].setAlpha(1 - arg1);
+				textViews[arg0 + 1].setAlpha(1 - arg1);
 			}
 		}
-		
+
 	}
 
 	@Override
 	public void onPageSelected(int arg0) {
-		
+
 	}
 
 	/**
@@ -168,7 +184,7 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
 	public void onClick(View arg0) {
 		int page = 0;
 		isScrollView = false;
-		switch(arg0.getId()){
+		switch (arg0.getId()) {
 		case R.id.imageViewChat_s:
 		case R.id.textViewChat_s:
 			page = PAGE_CHAT;
@@ -188,46 +204,61 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
 		default:
 			break;
 		}
-		if(viewPager.getCurrentItem() != page){
+		if (viewPager.getCurrentItem() != page) {
 			viewPager.setCurrentItem(page);
 			clearView();
-			imageViews_s[page].setAlpha((float)1);
-			textViews_s[page].setAlpha((float)1);
-			imageViews[page].setAlpha((float)0);
-			textViews[page].setAlpha((float)0);
+			imageViews_s[page].setAlpha((float) 1);
+			textViews_s[page].setAlpha((float) 1);
+			imageViews[page].setAlpha((float) 0);
+			textViews[page].setAlpha((float) 0);
 		}
 	}
-	
-	private void clearView(){
+
+	private void clearView() {
 		for (int i = 0; i < MAX_PAGES; i++) {
-			imageViews_s[i].setAlpha((float)0);
-			textViews_s[i].setAlpha((float)0);
-			imageViews[i].setAlpha((float)1);
-			textViews[i].setAlpha((float)1);
+			imageViews_s[i].setAlpha((float) 0);
+			textViews_s[i].setAlpha((float) 0);
+			imageViews[i].setAlpha((float) 1);
+			textViews[i].setAlpha((float) 1);
 		}
 	}
-	
+
 	/**
 	 * ViewPager切换 淡入淡出效果
+	 * 
 	 * @author bzsy
-	 *
+	 * 
 	 */
 	public class FadeOutPageTransformer implements ViewPager.PageTransformer {
-		
-	    public void transformPage(View view, float position) {
 
-	        if (position < -1) { // [-Infinity,-1)
-	            // This page is way off-screen to the left.
-	            view.setAlpha(0);
+		public void transformPage(View view, float position) {
 
-	        } else if (position <= 1) { // [-1,1]
-	            // Fade the page relative to its position.
-	            view.setAlpha(1-Math.abs(position));
+			if (position < -1) { // [-Infinity,-1)
+				// This page is way off-screen to the left.
+				view.setAlpha(0);
 
-	        } else { // (1,+Infinity]
-	            // This page is way off-screen to the right.
-	            view.setAlpha(0);
+			} else if (position <= 1) { // [-1,1]
+				// Fade the page relative to its position.
+				view.setAlpha(1 - Math.abs(position));
+
+			} else { // (1,+Infinity]
+				// This page is way off-screen to the right.
+				view.setAlpha(0);
 			}
 		}
+	}
+
+	/**
+	 * 消息提示
+	 * 
+	 * @param num
+	 */
+	private void setMessageNotify(int num) {
+		// 底部导航栏
+		BadgeView badgeView = new BadgeView(this);
+		badgeView.setBadgeGravity(Gravity.CENTER_HORIZONTAL);
+		badgeView.setBadgeMargin(0, 1, -15, 0);
+		badgeView.setBadgeCount(num);
+		((FrameLayout) findViewById(R.id.tabChat)).addView(badgeView);
 	}
 }
