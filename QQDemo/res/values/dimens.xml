@@ -6,5 +6,7 @@
     <dimen name="sliding_menu_paddingleft">20dp</dimen>
     <dimen name="sliding_menu_paddingtop">5dp</dimen>
     <dimen name="sliding_menu_paddingbottom">5dp</dimen>
+    <dimen name="tab_height">60dp</dimen>
+    <dimen name="textview_drawable_padding">10dp</dimen>
 
 </resources>

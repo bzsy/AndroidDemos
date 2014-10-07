@@ -2,5 +2,6 @@
 <resources>
 
     <color name="slidingmenu_bgcolr">#191f24</color>
+    <color name="backgroud_blue">#00a0e0</color>
 
 </resources>
