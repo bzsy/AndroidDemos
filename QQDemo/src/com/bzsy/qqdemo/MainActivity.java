@@ -2,6 +2,7 @@ package com.bzsy.qqdemo;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v4.widget.SlidingPaneLayout.PanelSlideListener;
@@ -26,8 +27,6 @@ public class MainActivity extends ActionBarActivity {
 		getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 		maxMargin = displayMetrics.heightPixels / 10;
 
-		SlidingPaneLayout slidingPaneLayout = (SlidingPaneLayout) findViewById(R.id.slidingPaneLayout);
-
 		menuFragment = new FragmentSlidingMenu();
 		contentFragment = new FragmentViewPager();
 		FragmentTransaction transaction = getSupportFragmentManager()
@@ -36,6 +35,8 @@ public class MainActivity extends ActionBarActivity {
 		transaction.replace(R.id.content, contentFragment);
 		transaction.commit();
 
+		SlidingPaneLayout slidingPaneLayout = (SlidingPaneLayout) findViewById(R.id.slidingPaneLayout);
+		slidingPaneLayout.setSliderFadeColor(Color.TRANSPARENT);
 		slidingPaneLayout.setPanelSlideListener(new PanelSlideListener() {
 
 			/**
