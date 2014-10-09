@@ -14,15 +14,27 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
-public class FragmentChat extends Fragment implements LoadDataListener {
+public class FragmentChat extends Fragment implements LoadDataListener,
+		OnItemLongClickListener {
 
 	private MyListView listView;
 	private SimpleAdapter simpleAdapter;
+	private PopupWindow popupWindow;
+	private Button btnDeleteItem;
+	private TextView popupTitle;
+	private View v;
 	private ArrayList<HashMap<String, Object>> arrayList = new ArrayList<HashMap<String, Object>>();
 	private int[] chatIcons = new int[] { R.drawable.chat1, R.drawable.chat2,
 			R.drawable.chat3, R.drawable.chat4, R.drawable.chat5,
@@ -36,8 +48,7 @@ public class FragmentChat extends Fragment implements LoadDataListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.layout_fragment_chat, container,
-				false);
+		v = inflater.inflate(R.layout.layout_fragment_chat, container, false);
 
 		listView = (MyListView) v.findViewById(R.id.chatListView);
 		listView.setLoadDataListener(this);
@@ -50,7 +61,25 @@ public class FragmentChat extends Fragment implements LoadDataListener {
 				getActivity().getApplicationContext(), arrayList,
 				R.layout.layout_list_item, from, to);
 		listView.setAdapter(simpleAdapter);
-		registerForContextMenu(listView);
+		listView.setOnItemLongClickListener(this);
+
+		View popupView = inflater.inflate(R.layout.popup_window, null);
+		popupTitle = (TextView) popupView.findViewById(R.id.popupTitle);
+		btnDeleteItem = (Button) popupView.findViewById(R.id.deleteItemBtn);
+		btnDeleteItem.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				arrayList.remove(item_slected);
+				simpleAdapter.notifyDataSetChanged();
+				popupWindow.dismiss();
+			}
+		});
+
+		popupWindow = new PopupWindow(popupView, LayoutParams.MATCH_PARENT,
+				LayoutParams.MATCH_PARENT, true);
+		popupWindow.setFocusable(true);
+
 		return v;
 	}
 
@@ -111,5 +140,16 @@ public class FragmentChat extends Fragment implements LoadDataListener {
 			break;
 		}
 		return super.onContextItemSelected(item);
+	}
+
+	@Override
+	public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2,
+			long arg3) {
+		// TODO Auto-generated method stub
+		item_slected = arg2 - 1;
+		popupTitle.setText(arrayList.get(item_slected).get("ItemTitle")
+				.toString());
+		popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+		return false;
 	}
 }
