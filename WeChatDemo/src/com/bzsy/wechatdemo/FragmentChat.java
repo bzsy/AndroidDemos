@@ -2,32 +2,26 @@ package com.bzsy.wechatdemo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import com.bzsy.wechatdemo.MyListView.LoadDataListener;
-import com.jauker.widget.BadgeView;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 public class FragmentChat extends Fragment implements LoadDataListener,
-		OnItemLongClickListener {
+		OnItemLongClickListener, OnClickListener {
 
 	private MyListView listView;
 	private SimpleAdapter simpleAdapter;
@@ -42,8 +36,7 @@ public class FragmentChat extends Fragment implements LoadDataListener,
 			R.drawable.chat9, R.drawable.chat10 };
 	private String[] weekDays = new String[] { "周日", "周六", "周五", "周四", "周三",
 			"周二", "周一" };
-	final int ITEM_DEL = 1;// contextmenu中的删除项
-	private int item_slected;// contextmenu对应的列表项
+	private int item_slected; // 当前被选中的列表项
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,21 +58,14 @@ public class FragmentChat extends Fragment implements LoadDataListener,
 
 		View popupView = inflater.inflate(R.layout.popup_window, null);
 		popupTitle = (TextView) popupView.findViewById(R.id.popupTitle);
+		((ImageView) popupView.findViewById(R.id.popupBackground))
+				.setOnClickListener(this);
 		btnDeleteItem = (Button) popupView.findViewById(R.id.deleteItemBtn);
-		btnDeleteItem.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				arrayList.remove(item_slected);
-				simpleAdapter.notifyDataSetChanged();
-				popupWindow.dismiss();
-			}
-		});
+		btnDeleteItem.setOnClickListener(this);
 
 		popupWindow = new PopupWindow(popupView, LayoutParams.MATCH_PARENT,
 				LayoutParams.MATCH_PARENT, true);
 		popupWindow.setFocusable(true);
-
 		return v;
 	}
 
@@ -113,34 +99,34 @@ public class FragmentChat extends Fragment implements LoadDataListener,
 		}
 	}
 
-	/**
-	 * ContextMenu
-	 */
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v,
-			ContextMenuInfo menuInfo) {
-		AdapterContextMenuInfo mMenuInfo = (AdapterContextMenuInfo) menuInfo;
-		item_slected = mMenuInfo.position - 1;
-		menu.setHeaderTitle(arrayList.get(item_slected).get("ItemTitle")
-				.toString());
-		menu.add(0, 1, 0, "删除该聊天");
-
-		super.onCreateContextMenu(menu, v, menuInfo);
-	}
-
-	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case 1:
-			arrayList.remove(item_slected);
-			simpleAdapter.notifyDataSetChanged();
-			break;
-
-		default:
-			break;
-		}
-		return super.onContextItemSelected(item);
-	}
+	// /**
+	// * ContextMenu
+	// */
+	// @Override
+	// public void onCreateContextMenu(ContextMenu menu, View v,
+	// ContextMenuInfo menuInfo) {
+	// AdapterContextMenuInfo mMenuInfo = (AdapterContextMenuInfo) menuInfo;
+	// item_slected = mMenuInfo.position - 1;
+	// menu.setHeaderTitle(arrayList.get(item_slected).get("ItemTitle")
+	// .toString());
+	// menu.add(0, 1, 0, "删除该聊天");
+	//
+	// super.onCreateContextMenu(menu, v, menuInfo);
+	// }
+	//
+	// @Override
+	// public boolean onContextItemSelected(MenuItem item) {
+	// switch (item.getItemId()) {
+	// case 1:
+	// arrayList.remove(item_slected);
+	// simpleAdapter.notifyDataSetChanged();
+	// break;
+	//
+	// default:
+	// break;
+	// }
+	// return super.onContextItemSelected(item);
+	// }
 
 	@Override
 	public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -151,5 +137,20 @@ public class FragmentChat extends Fragment implements LoadDataListener,
 				.toString());
 		popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
 		return false;
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.deleteItemBtn:
+			arrayList.remove(item_slected);
+			simpleAdapter.notifyDataSetChanged();
+			popupWindow.dismiss();
+			break;
+		case R.id.popupBackground:
+			popupWindow.dismiss();
+			break;
+		}
 	}
 }
